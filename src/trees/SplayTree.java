@@ -1,7 +1,7 @@
+package trees;
+
 public class SplayTree<T extends Comparable<? super T>>
 {
-	private BSTNode<T> root;
-
 	/**
 	 * Bottom-up implementation of the splay operation. This
 	 * is the fundamental operation that underlies all of the
@@ -14,7 +14,7 @@ public class SplayTree<T extends Comparable<? super T>>
 	 */
 	public boolean bottomUpSplay(T value)
 	{
-
+		return true;
 	}
 
 	/**
@@ -23,10 +23,13 @@ public class SplayTree<T extends Comparable<? super T>>
 	 * bottom-up splay, but it is slightly faster on average.
 	 *
 	 * @param value		value to splay
+	 * @return 			true if the value was successfully splayed (i.e.,
+	 * 					the splay tree contained the element); otherwise,
+	 *					false.
 	 */
 	public boolean topDownSplay(T value)
 	{
-
+		return true;
 	}
 
 	/**
@@ -40,8 +43,7 @@ public class SplayTree<T extends Comparable<? super T>>
 	 */
 	public boolean insert(T value)
 	{
-
-		return false;
+		return true;
 	}
 
 	/**

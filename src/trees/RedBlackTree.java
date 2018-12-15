@@ -1,3 +1,5 @@
+package trees;
+
 public class RedBlackTree<T extends Comparable<? super T>>
 {
 
@@ -8,12 +10,12 @@ public class RedBlackTree<T extends Comparable<? super T>>
 
 		public RedBlackNode(T value)
 		{
-			this(value, null, null);
+			this(value, null, null, null);
 		}
 
-		public RedBlackNode(T value, RedBlackNode left, RedBlackNode right)
+		public RedBlackNode(T value, RedBlackNode<T> left, RedBlackNode<T> right, RedBlackNode<T> parent)
 		{
-			super(value, left, right);
+			super(value, left, right, parent);
 			red = true;
 		}
 

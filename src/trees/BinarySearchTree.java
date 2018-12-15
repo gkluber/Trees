@@ -1,6 +1,8 @@
+package trees;
+
 public class BinarySearchTree<T extends Comparable<? super T>>
 {
-	private BSTNode<T> root;
+	protected BSTNode<T> root;
 
 	/**
 	 * Finds the node that corresponds to this value.
@@ -60,13 +62,14 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 	 * node will be added on the left-side of a node.
 	 *
 	 * @param value		value to insert
+	 * @return 			true
 	 */
-	public void insert(T value)
+	public boolean insert(T value)
 	{
 		if(root == null)
 		{
 			root = new BSTNode<>(value);
-			return;
+			return true;
 		}
 
 		BSTNode<T> parent = root;
@@ -80,7 +83,7 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 				else
 				{
 					parent.setLeft(new BSTNode<>(value));
-					return;
+					return true;
 				}
 			}
 			else
@@ -90,6 +93,42 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 				else
 				{
 					parent.setRight(new BSTNode<>(value));
+					return true;
+				}
+			}
+		}
+	}
+
+	protected void insert(BSTNode<T> node)
+	{
+		if(root == null)
+		{
+			root = node;
+			return;
+		}
+
+		BSTNode<T> parent = root;
+		T value = node.getValue();
+		while(true)
+		{
+			int comparison = value.compareTo(parent.getValue());
+			if(comparison <= 0)
+			{
+				if(parent.getLeft() != null)
+					parent = parent.getLeft();
+				else
+				{
+					parent.setLeft(node);
+					return;
+				}
+			}
+			else
+			{
+				if(parent.getRight() != null)
+					parent = parent.getRight();
+				else
+				{
+					parent.setRight(node);
 					return;
 				}
 			}
@@ -263,7 +302,6 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 				{
 					// The node has neither a left child or a right child, so delete it
 					grandparent.setLeft(null);
-					parent.setParent(null);
 				}
 				return parent.getValue();
 			}
@@ -315,7 +353,6 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 				{
 					// The node has neither a left child or a right child, so delete it
 					grandparent.setRight(null);
-					parent.setParent(null);
 				}
 				return parent.getValue();
 			}

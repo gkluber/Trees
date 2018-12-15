@@ -1,3 +1,5 @@
+package trees;
+
 public class BSTNode<T extends Comparable<? super T>>
 {
 	protected BSTNode<T> parent;
@@ -12,8 +14,8 @@ public class BSTNode<T extends Comparable<? super T>>
 
 	public BSTNode(T value, BSTNode<T> left, BSTNode<T> right, BSTNode<T> parent)
 	{
-		this.left = left;
-		this.right = right;
+		setLeft(left);
+		setRight(right);
 		this.value = value;
 		this.parent = parent;
 	}
@@ -61,8 +63,37 @@ public class BSTNode<T extends Comparable<? super T>>
 		return parent;
 	}
 
+	/**
+	 * Private method for setting the parent. todo documentation
+	 *
+	 * @param parent
+	 */
 	private void setParent(BSTNode<T> parent)
 	{
 		this.parent = parent;
+	}
+
+	@Override
+	public boolean equals(Object other)
+	{
+		if(!(other instanceof BSTNode))
+			return false;
+
+		BSTNode<?> otherNode = (BSTNode<?>) other;
+		boolean valuesEqual = this.value == null && otherNode.value == null
+								|| this.value != null && this.value.equals(otherNode.value);
+
+		return valuesEqual && this.parent == otherNode.parent
+					&& this.left == otherNode.left && this.right == otherNode.right;
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append('<');
+		sb.append(value);
+		sb.append('>');
+		return sb.toString();
 	}
 }
