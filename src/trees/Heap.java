@@ -71,8 +71,13 @@ public class Heap<T extends Comparable<? super T>>
 
 	private void removeRoot()
 	{
+		if(size() == 1)
+			completeTree.clear();
+		else
+			completeTree.set(0, completeTree.remove(completeTree.size() - 1));
+
 		int index = 0;
-		while(true)
+		while(index < completeTree.size())
 		{
 			int leftIndex = index * 2 + 1;
 			int rightIndex = index * 2 + 2;
@@ -106,9 +111,16 @@ public class Heap<T extends Comparable<? super T>>
 			{
 				T left = completeTree.get(leftIndex);
 				T right = completeTree.get(rightIndex);
-				T candidateMin = TreeUtil.min(left, right);
-				if(shouldSwap(value, candidateMin))
-					swap(index, candidateMin == left ? leftIndex : rightIndex);
+				T candidate = min ? TreeUtil.min(left, right) : TreeUtil.max(left, right);
+				if(shouldSwap(value, candidate))
+				{
+					boolean swapLeft = candidate == left;
+					swap(index, swapLeft ? leftIndex : rightIndex);
+					if(swapLeft)
+						index = leftIndex;
+					else
+						index = rightIndex;
+				}
 				else
 					break;
 			}
